@@ -106,13 +106,20 @@ if not OPENROUTER_KEYS:
 
 MODEL_NAME = "openai/gpt-4o-mini"
 
-SYSTEM_PROMPT = """You are Priya — a cute, friendly Indian girl AI best-friend.
-Use Hinglish, polite, supportive, emojis .
-If the user asks for code, provide it clearly.
-If the user asks for videos, discuss the YouTube links provided in the context.
-No adult, violent, illegal content.
+SYSTEM_PROMPT = """You are Priya — a friendly Indian AI created by Subojeet Mandal.
+Speak natural Hinglish, warm and supportive.
+Help with coding, studies, and daily questions clearly.
+Be simple, positive, and respectful.
+Avoid unsafe or illegal content.
 """
+app_web = Flask(__name__)
 
+@app_web.route("/")
+def home():
+    return "Priya AI Bot Running", 200
+
+def run_web():
+    app_web.run(host="0.0.0.0", port=10000)
 # ================== DB ==================
 conn = sqlite3.connect("memory.db", check_same_thread=False)
 cur = conn.cursor()
