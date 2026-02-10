@@ -7,6 +7,8 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, Con
 from gtts import gTTS
 import speech_recognition as sr
 import googleapiclient.discovery
+from flask import Flask
+import threading
 
 # ================== ENV ==================
 load_dotenv()
@@ -804,6 +806,9 @@ async def off_rose(update, ctx):
 
 # ================== MAIN ==================
 def main():
+    # 🔥 Keep bot awake (Render + UptimeRobot)
+    threading.Thread(target=run_web).start()
+
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("voice", voice_on))
